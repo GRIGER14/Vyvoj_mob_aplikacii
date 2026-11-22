@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import sk.receipttracker.ui.screens.AddEditExpenseScreen
+import sk.receipttracker.ui.screens.AnalyticsScreen
 import sk.receipttracker.ui.screens.ExpenseDetailScreen
 import sk.receipttracker.ui.screens.ExpenseListScreen
 import sk.receipttracker.ui.screens.MapScreen
@@ -50,6 +51,7 @@ sealed class Screen(val route: String) {
         fun createRoute(expenseId: Long) = "expense_detail/$expenseId"
     }
     object Map : Screen("map")
+    object Analytics : Screen("analytics")
 }
 
 @Composable
@@ -66,7 +68,8 @@ fun ReceiptTrackerApp(viewModel: ExpenseViewModel) {
                 onAddExpenseClick = { navController.navigate(Screen.AddExpense.route) },
                 onEditExpenseClick = { id -> navController.navigate(Screen.EditExpense.createRoute(id)) },
                 onExpenseClick = { id -> navController.navigate(Screen.ExpenseDetail.createRoute(id)) },
-                onOpenMapClick = { navController.navigate(Screen.Map.route) }
+                onOpenMapClick = { navController.navigate(Screen.Map.route) },
+                onOpenAnalyticsClick = { navController.navigate(Screen.Analytics.route) }
             )
         }
 
@@ -105,6 +108,13 @@ fun ReceiptTrackerApp(viewModel: ExpenseViewModel) {
 
         composable(Screen.Map.route) {
             MapScreen(
+                viewModel = viewModel,
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Analytics.route) {
+            AnalyticsScreen(
                 viewModel = viewModel,
                 onNavigateBack = { navController.popBackStack() }
             )

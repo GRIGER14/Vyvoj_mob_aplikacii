@@ -40,3 +40,13 @@ data class Expense(
         )
     }
 }
+
+data class StoreInsight(
+    val storeName: String,
+    val totalAmount: Double,
+    val count: Int,
+    val latitude: Double,
+    val longitude: Double,
+    val latestCategory: String,
+    val latestDate: Long
+)

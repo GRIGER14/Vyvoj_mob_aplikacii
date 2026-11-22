@@ -71,6 +71,9 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.kotlinx.coroutines.play.services)
 
+    // ML Kit OCR Text Recognition
+    implementation(libs.play.services.mlkit.text.recognition)
+
     // Image loading
     implementation(libs.coil.compose)
 
